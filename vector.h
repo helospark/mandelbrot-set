@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #include <iostream>
+#include <string>
 
 class Vector {
 	private: 
@@ -19,6 +20,8 @@ class Vector {
 		double getX();
 		double getY();
 		double getZ();
+		
+		Vector& parseFromString(const std::string& data);
 		
 		friend std::ostream& operator<<(std::ostream& out, const Vector& vector);
 };

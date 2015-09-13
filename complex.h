@@ -1,12 +1,14 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 #include <iostream>
+#include <string>
 
 class Complex {
 	private:
 		double real;
 		double imaginary;
 	public:
+		Complex();
 		Complex(double real, double imaginary);
 		double lengthSquared();
 		Complex operator*(const Complex& complex);
@@ -16,6 +18,8 @@ class Complex {
 		Complex addReal(double real);
 		double getReal();
 		double getImaginary();
-		void set(double real, double imaginary);
+		Complex& set(double real, double imaginary);
+		Complex& set(const Complex& complex);
+		Complex& parseFromString(const std::string& data);
 };
 #endif

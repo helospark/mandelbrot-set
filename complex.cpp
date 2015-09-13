@@ -1,4 +1,12 @@
 #include "complex.h"
+#include "generalException.h"
+#include <cstring>
+#include <algorithm>
+
+Complex::Complex() {
+	this->real = 0.0;
+	this->imaginary = 0.0;
+}
 
 Complex::Complex(double real, double imaginary) {
 	this->real = real;
@@ -39,9 +47,32 @@ double Complex::getImaginary() {
 	return this->imaginary;
 }
 
-void Complex::set(double real, double imaginary) {
+Complex& Complex::set(double real, double imaginary) {
 	this->real = real;
 	this->imaginary = imaginary;
+	return *this;
+}
+
+Complex& Complex::set(const Complex& complex) {
+	this->real = complex.real;
+	this->imaginary = complex.imaginary;
+	return *this;
+}
+		
+
+Complex& Complex::parseFromString(const std::string& data) {
+	std::string localData = data;
+	const char* charsToRemove = " \t()";
+  for (unsigned int i = 0; i < std::strlen(charsToRemove); ++i) {
+    localData.erase(std::remove(localData.begin(), localData.end(), charsToRemove[i]), localData.end());
+  }
+  size_t separator = localData.find(",");
+  if (separator == std::string::npos) {
+  	throw new GeneralException("Cannot parse complex data, missing ',' separator");
+  }
+  this->real = atof(localData.substr(0, separator).c_str());
+  this->imaginary = atof(localData.substr(separator + 1, std::string::npos).c_str());
+  return *this;
 }
 
 std::ostream& operator<<(std::ostream& out, const Complex& complex) {

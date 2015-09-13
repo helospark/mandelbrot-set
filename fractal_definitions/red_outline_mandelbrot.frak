@@ -1,0 +1,18 @@
+# This is a test fractal file
+width   = 1920
+height  = 1200
+min_x   = -2.4
+max_x   = 1.2
+min_y   = -1.2
+max_y   = 1.2
+filename = mandelbrot
+iteration_limit = 1000
+is_julia_set = false
+color_iteration_count=1000
+# (startColor) (endColor) multiplier from 0-1
+colors {
+	(0, 0, 0) (0, 0, 0) 0.0025
+	(0, 0, 0) (128, 0, 0) 0.05
+	(128, 0, 0) (255, 0, 0) 0.25
+	(255, 0, 0) (255, 255, 255) 1.0
+}
