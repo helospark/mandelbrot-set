@@ -31,7 +31,7 @@ void Fractal::fillPalette() {
 			endIndex = params.iterationLimit - 1;
 		}
 		for (int j = startIndex; j < endIndex; ++j) {
-			palette[j] = params.colors[i].startColor.interpolate(params.colors[i].endColor, (double)j / endIndex);
+			palette[j] = params.colors[i].startColor.interpolate(params.colors[i].endColor, (double)(j - startIndex) / (endIndex - startIndex));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 # This is a test fractal file
-width   = 1920
-height  = 1200
+width   = 5760
+height  = 3600
 min_x   = -2.4
 max_x   = 1.2
 min_y   = -1.2
