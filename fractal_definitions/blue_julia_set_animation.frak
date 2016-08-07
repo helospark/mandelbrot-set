@@ -1,7 +1,7 @@
 # This is a test fractal file
-type    = julia
-width   = 11520
-height  = 7200
+type    = julia_around_mandelbrot
+width   = 3840
+height  = 2160
 min_x   = -1.8
 max_x   = 1.8
 min_y   = -1.2
@@ -9,12 +9,14 @@ max_y   = 1.2
 filename = mandelbrot
 iteration_limit = 1000
 is_julia_set = true
+is_julia_animation = true
 julia_set_start_parameter = (-0.8, 0.156)
-color_iteration_count=1000
+max_iteration_reached_color = (255, 255, 255)
+#color_iteration_count=100
 # (startColor) (endColor) multiplier from 0-1
 colors {
 	(0, 0, 0) (0, 0, 0) 0.0125
-	(0,0,0) (40, 255, 240) 0.45
-	(40, 255, 240) (168,255,253) 0.875
-	(168,255,253) (255,255,255) 1
+	(0,0,0) (40, 255, 240) 0.15
+	(40, 255, 240) (168,255,253) 0.475
+	(100,100,100) (255,255,255) 1
 }

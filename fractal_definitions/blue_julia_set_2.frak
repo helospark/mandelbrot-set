@@ -1,4 +1,5 @@
 # This is a test fractal file
+type    = julia
 width   = 1920
 height  = 1200
 min_x   = -1.8

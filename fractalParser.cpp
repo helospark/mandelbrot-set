@@ -112,6 +112,15 @@ std::string FractalParser::parsePropertyToString(std::map<std::string, std::stri
 	}
 }
 
+Vector FractalParser::parsePropertyToVector(std::map<std::string, std::string>& properties, std::string propertyName, const Vector& defaultValue) {
+	if (properties.find(propertyName) != properties.end()) {
+		return Vector().parseFromString(properties[propertyName]);
+	} else {
+		std::cout << "Warning: " << propertyName << " not set, default " << defaultValue << " is used instead!" << std::endl;
+		return defaultValue;
+	}
+}
+
 std::vector<ColorInterpolation> FractalParser::parseColors(const std::vector<std::string>& lines, double iterationCorrection) {
 	std::vector<ColorInterpolation> result;
 	int startLine = 0;
@@ -153,9 +162,14 @@ FractalParams FractalParser::readFractal(std::string fileName) {
 	result.maxY = parsePropertyToDouble(properties, "max_y", 1.8);
 	double iterationCorrection = result.iterationLimit / parsePropertyToInt(properties, "color_iteration_count", 1000);
 	result.fileName = parsePropertyToString(properties, "filename", "mandelbrot");
-	result.isJuliaSet = parsePropertyToBool(properties, "is_julia_set", false);
-	if (result.isJuliaSet) {
+	result.type = parsePropertyToString(properties, "type", "mandelbrot");
+	result.maxIterationReachedColor = parsePropertyToVector(properties, "max_iteration_reached_color", Vector(0,0,0));
+	if (result.type == "julia") {
 		result.juliaSetStartParameter = parsePropertyToComplex(properties, "julia_set_start_parameter", Complex(-0.4, 0.6));
+	}
+	if (result.type == "julia_around_mandelbrot") {
+	  result.outlineMandelbrotHeight = parsePropertyToInt(properties, "outlineMandelbrotHeight", 1080);
+    result.outlineMandelbrotWidth = parsePropertyToInt(properties, "outlineMandelbrotWidth", 1920);
 	}
 	
 	std::vector<ColorInterpolation> colors = parseColors(lines, iterationCorrection);

@@ -39,11 +39,11 @@ Complex Complex::addReal(double real) {
 	return Complex(this->real + real, this->imaginary);
 }
 
-double Complex::getReal() {
+double Complex::getReal() const {
 	return real;
 }
 
-double Complex::getImaginary() {
+double Complex::getImaginary() const {
 	return this->imaginary;
 }
 
@@ -76,6 +76,6 @@ Complex& Complex::parseFromString(const std::string& data) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Complex& complex) {
-	out << "(" << complex.real << ", " << "i" << complex.imaginary << ")" << std::endl;
+	out << "(" << complex.real << ", " << "i" << complex.imaginary << ")";
 	return out;
 }

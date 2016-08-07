@@ -76,6 +76,6 @@ Vector& Vector::parseFromString(const std::string& data) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Vector& vector) {
-	out << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")" << std::endl;
+	out << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
 	return out;
 }

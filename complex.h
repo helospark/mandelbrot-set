@@ -4,7 +4,7 @@
 #include <string>
 
 class Complex {
-	private:
+	public:
 		double real;
 		double imaginary;
 	public:
@@ -16,8 +16,8 @@ class Complex {
 		Complex& operator=(const Complex& complex);
 		friend std::ostream& operator<<(std::ostream& out, const Complex& complex);
 		Complex addReal(double real);
-		double getReal();
-		double getImaginary();
+		double getReal() const;
+		double getImaginary() const;
 		Complex& set(double real, double imaginary);
 		Complex& set(const Complex& complex);
 		Complex& parseFromString(const std::string& data);

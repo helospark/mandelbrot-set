@@ -1,2 +1,8 @@
+.settings
+.project
+.cproject
+*.jpg
 *.bmp
+*.png
 *.out
+*.mp4
