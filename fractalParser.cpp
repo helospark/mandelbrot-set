@@ -5,6 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include "generalException.h"
+#include "FractalType.h"
 
 std::vector<std::string> FractalParser::readAllLinesFromFile(const std::string& fileName) {
 	std::vector<std::string> result;
@@ -162,14 +163,15 @@ FractalParams FractalParser::readFractal(std::string fileName) {
 	result.maxY = parsePropertyToDouble(properties, "max_y", 1.8);
 	double iterationCorrection = result.iterationLimit / parsePropertyToInt(properties, "color_iteration_count", 1000);
 	result.fileName = parsePropertyToString(properties, "filename", "mandelbrot");
-	result.type = parsePropertyToString(properties, "type", "mandelbrot");
+	result.type = parsePropertyToString(properties, "type", FractalType::MANDELBROT);
 	result.maxIterationReachedColor = parsePropertyToVector(properties, "max_iteration_reached_color", Vector(0,0,0));
-	if (result.type == "julia") {
+	if (result.type == FractalType::JULIA) {
 		result.juliaSetStartParameter = parsePropertyToComplex(properties, "julia_set_start_parameter", Complex(-0.4, 0.6));
 	}
-	if (result.type == "julia_around_mandelbrot") {
-	  result.outlineMandelbrotHeight = parsePropertyToInt(properties, "outlineMandelbrotHeight", 1080);
+	if (result.type == FractalType::JULIA_AROUND_MANDELBROT) {
     result.outlineMandelbrotWidth = parsePropertyToInt(properties, "outlineMandelbrotWidth", 1920);
+	  result.outlineMandelbrotHeight = parsePropertyToInt(properties, "outlineMandelbrotHeight", 1080);
+	  result.outlineInterpolationCount = parsePropertyToInt(properties, "outlineInterpolationCount", 3);
 	}
 	
 	std::vector<ColorInterpolation> colors = parseColors(lines, iterationCorrection);

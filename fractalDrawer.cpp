@@ -9,5 +9,5 @@ void FractalDrawer::draw(const std::shared_ptr<Bmp> bmp, const std::string& file
 	ss << fileName << "_" << time;
 	ss << ".bmp";;
 	bmp->save(ss.str());
-//	std::cout << "Saved fractal to file " << ss.str() << std::endl;
+	std::cout << "Saved fractal to file " << ss.str() << std::endl;
 };

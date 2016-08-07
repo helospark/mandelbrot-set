@@ -40,6 +40,7 @@ struct FractalParams {
 
 	int outlineMandelbrotWidth;
   int outlineMandelbrotHeight;
+  int outlineInterpolationCount;
 };
 
 namespace std {

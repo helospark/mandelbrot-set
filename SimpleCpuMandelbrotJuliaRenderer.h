@@ -9,12 +9,15 @@
 #define SIMPLECPUMANDELBROTJULIARENDERER_H_
 #include "CommandLineArguments.h"
 #include "IFractalRenderer.h"
+#include "FractalType.h"
+#include "ThreadedMandelbrotJuliaImageGenerator.h"
+#include "ThreadUtils.h"
 
 class SimpleCpuMandelbrotJuliaRenderer : public IFractalRenderer {
-	MandelbrotJuliaImageGenerator* imageGenerator;
+	ThreadedMandelbrotJuliaImageGenerator* imageGenerator;
 	FractalDrawer* fractalDrawer;
 public:
-	SimpleCpuMandelbrotJuliaRenderer(MandelbrotJuliaImageGenerator* fractalRenderer, FractalDrawer* fractalDrawer) {
+	SimpleCpuMandelbrotJuliaRenderer(ThreadedMandelbrotJuliaImageGenerator* fractalRenderer, FractalDrawer* fractalDrawer) {
 		this->imageGenerator = fractalRenderer;
 		this->fractalDrawer = fractalDrawer;
 	}
@@ -24,7 +27,7 @@ public:
 	}
 
 	virtual bool isSupported(const std::string& type, std::map<std::string, std::string>& params) override {
-		if (type != "mandelbrot" && type != "julia") {
+		if (type != FractalType::MANDELBROT && type != FractalType::JULIA) {
 			return false;
 		}
 		auto iterator = params.find(CommandLineArgumentConstants::COMPUTE_DEVICE_TYPE);
@@ -44,7 +47,7 @@ public:
 	}
 
 	virtual void render(const FractalParams& params, const std::map<std::string, std::string>& arguments) override {
-		std::shared_ptr<Bmp> result = imageGenerator->generateImage(params);
+		std::shared_ptr<Bmp> result = imageGenerator->generateImage(params, ThreadUtils::getThreadCountFromArgument(arguments));
 		fractalDrawer->draw(result, params.fileName);
 	}
 };

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <functional>
+#include "math.h"
 
 class Vector {
 	public:
@@ -17,7 +18,11 @@ class Vector {
 		Vector& operator=(const Vector& vector);
 		bool operator==(const Vector& vector) const {
 			return x == vector.x && y == vector.y && z == vector.z;
-		
+		}
+		bool equalsWithThreshold(const Vector& vector, double threshold) {
+		  return Math::doubleEquals(x, vector.x, threshold) &&
+		      Math::doubleEquals(y, vector.y, threshold) &&
+		      Math::doubleEquals(z, vector.z, threshold);
 		}
 		
 		Vector interpolate(const Vector& vector, double factor) const;
